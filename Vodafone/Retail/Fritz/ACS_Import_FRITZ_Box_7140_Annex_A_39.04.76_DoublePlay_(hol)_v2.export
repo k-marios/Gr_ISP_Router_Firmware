@@ -1,0 +1,2796 @@
+**** FRITZ!Box Fon WLAN 7140 Annex A CONFIGURATION EXPORT
+Password=$$$$MBJNDHVVEYCNUZ1VEXGQSJITJAKXFEYSY4YJQOCNZUNWDKUQZVI54BBR3WG4VRNMATQZGTLD4CCOD4GJSZGXT1VWGIPLT5XVQ1Q5F2QA
+FirmwareVersion=39.04.76
+CONFIG_INSTALL_TYPE=ar7_8MB_xilinx_4eth_2ab_isdn_te_pots_wlan_usb_host_62068
+OEM=avme
+Country=030
+Language=en
+**** CFGFILE:ar7.cfg
+/*
+ * /var/flash/ar7.cfg
+ * Sat Jan  1 01:31:03 2000
+ */
+
+ar7cfg {
+        mode = dsldmode_router;
+        igddenabled = yes;
+        igdd_control_enabled = no;
+        wan_bridge_with_dhcpc = yes;
+        wan_bridge_gateway = 0.0.0.0;
+        dhcpc_use_static_dns = no;
+        ethmode = ethmode_bridge;
+        tcom_targetarch = no;
+        mtu_cutback_mode = mtumode_auto;
+        mtu_cutback = 1500;
+        StatisticStartOfMonth = 1;
+        enable_mac_override = yes;
+        macdsl_override = 00:00:00:00:00:00;
+        ipv6mode = ipv6_tunnel;
+        ethinterfaces {
+                name = "eth0";
+                dhcp = no;
+                ipaddr = 192.168.178.1;
+                netmask = 255.255.255.0;
+                dstipaddr = 0.0.0.0;
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        } {
+                name = "eth0:0";
+                dhcp = no;
+                ipaddr = 169.254.1.1;
+                netmask = 255.255.0.0;
+                dstipaddr = 0.0.0.0;
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        } {
+                name = "usbrndis";
+                dhcp = no;
+                ipaddr = 192.168.179.1;
+                netmask = 255.255.255.0;
+                dstipaddr = 0.0.0.0;
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        } {
+                name = "wlan";
+                dhcp = no;
+                ipaddr = 192.168.182.1;
+                netmask = 255.255.255.0;
+                dstipaddr = 0.0.0.0;
+                interfaces = "tiwlan0", "wdsup0", "wdsdw0", "wdsdw1", 
+                             "wdsdw2", "wdsdw3";
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        }
+        brinterfaces {
+                name = "lan";
+                dhcp = no;
+                ipaddr = 192.168.178.1;
+                netmask = 255.255.255.0;
+                dstipaddr = 0.0.0.0;
+                interfaces = "eth0", "usbrndis", "tiwlan0", "wdsup0", 
+                             "wdsdw0", "wdsdw1", "wdsdw2", "wdsdw3";
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        } {
+                name = "lan:0";
+                dhcp = no;
+                ipaddr = 169.254.1.1;
+                netmask = 255.255.0.0;
+                dstipaddr = 0.0.0.0;
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        }
+        dslinterface {
+                name = "dsl";
+                dhcp = no;
+                ipaddr = 169.254.2.1;
+                netmask = 255.255.255.255;
+                dstipaddr = 169.254.2.1;
+                dhcpenabled = yes;
+                dhcpstart = 0.0.0.0;
+                dhcpend = 0.0.0.0;
+        }
+        dslinterface_metric = 2;
+        ipbridge {
+                enabled = no;
+        }
+        pppoefw {
+                interfaces = "usbrndis", "eth0", "wlan", "lan";
+                nofirewall = yes;
+                ipnetbiosfilter = yes;
+                dnsfilter_for_active_directory = yes;
+                hostuniq_filter = "";
+                dpconfig {
+                        security = dpsec_host;
+                        lowinput {
+                                policy = "reject";
+                                accesslist = 
+                                             "permit ip any any connection outgoing-related", 
+                                             "permit ip any any connection incoming-related", 
+                                             "permit icmp any any";
+                        }
+                        lowoutput {
+                                policy = "permit";
+                        }
+                        highinput {
+                                policy = "permit";
+                        }
+                        highoutput {
+                                policy = "permit";
+                                accesslist = 
+                                             "reject ip any 242.0.0.0 255.0.0.0", 
+                                             "deny ip any host 255.255.255.255", 
+                                             "reject ip any 169.254.0.0 255.255.0.0", 
+                                             "reject udp any any range 161 162", 
+                                             "reject udp any any eq 111";
+                        }
+                }
+        }
+        budget {
+                Enabled = no;
+                Period = 2;
+                VolumeLow = 0;
+                VolumeHigh = 0;
+                ConnectionTime = 0;
+                WarnOnly = yes;
+        }
+        vccs {
+                VPI = 8;
+                VCI = 35;
+                traffic_class = atm_traffic_class_UBR;
+                pcr = 0;
+                scr = 0;
+                priority = 0;
+                dsl_encap = dslencap_pppoe;
+                ipbridgeing = no;
+                ipbridgeing_igmp = no;
+                pppoeforwarding = no;
+                connections = "internet";
+        } {
+                VPI = 8;
+                VCI = 36;
+                traffic_class = atm_traffic_class_UBR;
+                pcr = 0;
+                scr = 0;
+                priority = 0;
+                dsl_encap = dslencap_ether;
+                ipbridgeing = no;
+                ipbridgeing_igmp = no;
+                pppoeforwarding = no;
+                connections = "voip";
+        }
+        mcupstream = "internet";
+        voip_forwardrules = "udp 0.0.0.0:5060 0.0.0.0:5060", 
+                            "tcp 0.0.0.0:5060 0.0.0.0:5060", 
+                            "udp 0.0.0.0:7078+32 0.0.0.0:7078";
+        tr069_forwardrules = "tcp 0.0.0.0:8089 0.0.0.0:8089";
+        internet_in_nat_rules_enabled = yes;
+        internet_out_nat_rules_enabled = yes;
+        dslifaces {
+                enabled = yes;
+                name = "internet";
+                dsl_encap = dslencap_inherit;
+                dslinterfacename = "dsl";
+                no_masquerading = no;
+                no_firewall = no;
+                pppoevlanauto = no;
+                pppoevlanauto_startwithvlan = no;
+                ppptarget = "internet";
+                etherencapcfg {
+                        use_dhcp = yes;
+                        use_dhcp_if_not_rbe = yes;
+                        ipaddr = 0.0.0.0;
+                        netmask = 0.0.0.0;
+                        gateway = 0.0.0.0;
+                        dns1 = 0.0.0.0;
+                        dns2 = 0.0.0.0;
+                        mtu = 0;
+                }
+                is_mcupstream = yes;
+                stay_always_online = yes;
+                disable_ondemand = no;
+                only_route_when_connected = no;
+                redial_delay_after_auth_failure = 1m;
+                redial_limit = 3;
+                redial_after_limit_reached = 10m;
+                redial_after_limit_reached_variance = 5m;
+                redial_delay_after_low_error = 10s;
+                redial_delay_after_ppp_timeout = 10s;
+                redial_delay_after_ppp_error = 0w;
+                routes_only_for_local = no;
+                disable_staticroutes_on_dhcproutes = no;
+                ripv2receiver_enabled = no;
+                dsldpconfig {
+                        security = dpsec_firewall;
+                        lowinput {
+                                policy = "permit";
+                                accesslist = 
+                                             "deny ip any 242.0.0.0 255.0.0.0", 
+                                             "deny ip any host 255.255.255.255", 
+                                             "deny udp any any range 161 162", 
+                                             "deny udp any any eq 111";
+                        }
+                        lowoutput {
+                                policy = "permit";
+                        }
+                        highinput {
+                                policy = "permit";
+                        }
+                        highoutput {
+                                policy = "permit";
+                                accesslist = 
+                                             "reject ip any 242.0.0.0 255.0.0.0", 
+                                             "deny ip any host 255.255.255.255", 
+                                             "reject ip any 169.254.0.0 255.255.0.0", 
+                                             "reject udp any any range 161 162", 
+                                             "reject udp any any eq 111";
+                        }
+                        forwardrules = "udp 0.0.0.0:5060 0.0.0.0:5060";
+                }
+        } {
+                enabled = yes;
+                name = "voip";
+                dsl_encap = dslencap_ether;
+                dslinterfacename = "dsl";
+                no_masquerading = no;
+                no_firewall = no;
+                pppoevlanauto = no;
+                pppoevlanauto_startwithvlan = no;
+                ppptarget = "voip";
+                etherencapcfg {
+                        use_dhcp = yes;
+                        use_dhcp_if_not_rbe = yes;
+                        ipaddr = 0.0.0.0;
+                        netmask = 0.0.0.0;
+                        gateway = 0.0.0.0;
+                        dns1 = 0.0.0.0;
+                        dns2 = 0.0.0.0;
+                        mtu = 0;
+                }
+                is_mcupstream = no;
+                stay_always_online = yes;
+                disable_ondemand = no;
+                only_route_when_connected = no;
+                redial_delay_after_auth_failure = 1m;
+                redial_limit = 3;
+                redial_after_limit_reached = 10m;
+                redial_after_limit_reached_variance = 5m;
+                redial_delay_after_low_error = 10s;
+                redial_delay_after_ppp_timeout = 10s;
+                redial_delay_after_ppp_error = 0w;
+                routes_only_for_local = no;
+                tcclassroutes = "sipdns", "sip", "rtp";
+                disable_staticroutes_on_dhcproutes = no;
+                ripv2receiver_enabled = no;
+                dsldpconfig {
+                        security = dpsec_firewall;
+                        lowinput {
+                                policy = "permit";
+                                accesslist = "permit udp any any", 
+                                             "permit icmp any any", 
+                                             "deny ip any host 255.255.255.255", 
+                                             "reject ip any any";
+                        }
+                        lowoutput {
+                                policy = "permit";
+                        }
+                        highinput {
+                                policy = "permit";
+                        }
+                        highoutput {
+                                policy = "permit";
+                                accesslist = "permit udp any any", 
+                                             "reject ip any any";
+                        }
+                        forwardrules = "udp 0.0.0.0:5060 0.0.0.0:5060";
+                }
+        }
+        targets {
+                type = pppcfg_target_internet;
+                name = "internet";
+                only_crypt_auth = no;
+                local {
+                        username = "$$$$1T131ZNIHTUARZSEYL1MTBEVVBLZXCXP44KOHYHN2SALGQLLRR11RMFIQ2SRT14EWSN5YGRRBGVGQAAA";
+                        passwd = "$$$$GXYQS3WZCFMB2U1N34MOFDYTCHG3WFFNIEZI6425LCWPIKWTNCJMKUL1UQJBL1MJOB6MCP412J4IQAAA";
+                }
+                remoteauth = pppcfg_authtype_chap;
+                remoteauth_only_on_incoming = yes;
+                remote {
+                }
+                inactivity_timeout = 0w;
+                bUseChargeInterval = no;
+                nChargeInterval = 1m;
+                lcpecho_disconnect_mode = lcpecho_auto;
+                logicaldisconnect_with_physical = yes;
+                disconnect_timeout = 0w;
+                finaldisconnectcall = no;
+                ipnetbiosspoofing = no;
+                ipnetbiosfilter = yes;
+                dnsfilter_for_active_directory = no;
+                no_outgoing_calls = no;
+                coso = pppcfg_coso_caller;
+                callback_delay = 1s;
+                icbmode = pppcfg_icbmode_none;
+                ocbmode = pppcfg_ocbmode_none;
+                mscbprefered = no;
+                multilink {
+                        extra_static_channels = 0;
+                        max_channels = 1;
+                        automatic = no;
+                        automatic_param {
+                                window = 20s;
+                                add_percent = 85;
+                                drop_percent = 70;
+                                sportlich = no;
+                        }
+                }
+                header_compression = yes;
+                data_compression = pppcfg_datacomp_auto;
+                stac_reset_with_history_number = no;
+                encryption = pppcfg_crypt_none;
+                inactivity_prevention_interval = 0w;
+                new_ipaddr_on_connect = no;
+                my_ipaddr = 0.0.0.0;
+                his_ipaddr = 0.0.0.0;
+                overwrite_dns1 = 0.0.0.0;
+                overwrite_dns2 = 0.0.0.0;
+                bVolumeRoundUp = no;
+                VolumeRoundUpBytes = 0;
+                bProviderDisconnectPrevention = no;
+                ProviderDisconnectPreventionInterval = 1d;
+                ProviderDisconnectPreventionHour = 2;
+                bProviderDisconnectPreventionHourSet = yes;
+                passiv_on_outgoing = no;
+                mode6 = mode6_off;
+        } {
+                type = pppcfg_target_internet;
+                name = "voip";
+                only_crypt_auth = no;
+                local {
+                        username = "";
+                        passwd = "";
+                }
+                remoteauth = pppcfg_authtype_chap;
+                remoteauth_only_on_incoming = yes;
+                remote {
+                }
+                inactivity_timeout = 0w;
+                bUseChargeInterval = no;
+                nChargeInterval = 1m;
+                lcpecho_disconnect_mode = lcpecho_auto;
+                logicaldisconnect_with_physical = yes;
+                disconnect_timeout = 0w;
+                finaldisconnectcall = no;
+                ipnetbiosspoofing = no;
+                ipnetbiosfilter = yes;
+                dnsfilter_for_active_directory = no;
+                no_outgoing_calls = no;
+                coso = pppcfg_coso_caller;
+                callback_delay = 1s;
+                icbmode = pppcfg_icbmode_none;
+                ocbmode = pppcfg_ocbmode_none;
+                mscbprefered = no;
+                multilink {
+                        extra_static_channels = 0;
+                        max_channels = 1;
+                        automatic = no;
+                        automatic_param {
+                                window = 20s;
+                                add_percent = 85;
+                                drop_percent = 70;
+                                sportlich = no;
+                        }
+                }
+                header_compression = yes;
+                data_compression = pppcfg_datacomp_auto;
+                stac_reset_with_history_number = no;
+                encryption = pppcfg_crypt_none;
+                inactivity_prevention_interval = 0w;
+                new_ipaddr_on_connect = no;
+                my_ipaddr = 0.0.0.0;
+                his_ipaddr = 0.0.0.0;
+                overwrite_dns1 = 0.0.0.0;
+                overwrite_dns2 = 0.0.0.0;
+                bVolumeRoundUp = no;
+                VolumeRoundUpBytes = 0;
+                bProviderDisconnectPrevention = no;
+                ProviderDisconnectPreventionInterval = 1d;
+                ProviderDisconnectPreventionHour = 2;
+                bProviderDisconnectPreventionHourSet = yes;
+                passiv_on_outgoing = no;
+                mode6 = mode6_off;
+        }
+        dslglobalconfig {
+                autodetect = no;
+                autodetectparams {
+                        nround = 2;
+                        timeout = 3s;
+                        npacket = 1;
+                }
+                speed_in_netto = 1024;
+                speed_out_netto = 128;
+                manual_speed = no;
+                connect_delay_when_synced = 3s;
+                sync_lost_delay = 0w;
+                default_tcom_vlan = 7;
+                templates {
+                        VPI = 1;
+                        VCI = 32;
+                        retries = 7;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 8;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 8;
+                        VCI = 48;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 8;
+                        VCI = 48;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 8;
+                        VCI = 48;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 8;
+                        VCI = 67;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 8;
+                        VCI = 67;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 8;
+                        VCI = 64;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 8;
+                        VCI = 36;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 0;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 0;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 9;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 1;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 1;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 0;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 0;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 34;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 0;
+                        VCI = 34;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 0;
+                        VCI = 34;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 33;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 8;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 8;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 8;
+                        VCI = 32;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 38;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 0;
+                        VCI = 38;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 8;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 8;
+                        VCI = 35;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 81;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 0;
+                        VCI = 81;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 0;
+                        VCI = 81;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 8;
+                        VCI = 81;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 8;
+                        VCI = 81;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 8;
+                        VCI = 81;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 0;
+                        VCI = 100;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                } {
+                        VPI = 0;
+                        VCI = 100;
+                        retries = 0;
+                        encap = dslencap_pppoa;
+                } {
+                        VPI = 0;
+                        VCI = 100;
+                        retries = 0;
+                        encap = dslencap_pppoa_llc;
+                } {
+                        VPI = 1;
+                        VCI = 50;
+                        retries = 0;
+                        encap = dslencap_pppoe;
+                }
+                MaxDownstreamRate = 0;
+                MaxUpstreamRate = 0;
+                RFI = 0;
+                DownstreamBlackoutBandStart = 0;
+                DownstreamBlackoutBandEnd = 0;
+                ControlBitfield = 0;
+                DownstreamMarginOffset = 0;
+                DownstreamPcbOffset = 0;
+                UpstreamPcbOffset = 0;
+                DiagnosticEnabled = no;
+                DSLMode = 0;
+                IsDSLModeSet = no;
+        }
+        accesslist_version = 2;
+}
+
+
+servercfg {
+        hostname = "(none)";
+        dns1 = 192.168.180.1;
+        dns2 = 192.168.180.2;
+}
+
+
+websrv {
+        port = "80";
+        read_timeout = 15m;
+        request_timeout = 30s;
+        keepalive_timeout = 5m;
+        nokeepalive = "*";
+        errordir = "/usr/www/html/errors";
+        webdir = "/usr/www";
+        cgidir = "cgi-bin";
+        indexfn = "index.var", "index.htm", "index.html";
+        users_only_for_https = no;
+}
+
+
+ipv6 {
+        ulamode = ulamode_dynamic;
+        use_default_ula = yes;
+        ula = fd00::;
+        use_fixed_mtu = no;
+        fixed_mtu = 1280;
+        radv {
+                MinRtrAdvInterval = 450;
+                MaxRtrAdvInterval = 600;
+                AdvDefaultLifetime = 1800;
+                PreferedLifeTime = 3600;
+                ValidLifeTime = 7200;
+        }
+        sixxs {
+                ticserver = "tic.sixxs.net";
+        }
+        labconfig {
+                enable = no;
+                radv_GUA_disable = no;
+                radv_overwrite_liftimes = no;
+                radv_overwrite_prefered_lifetime = 1800;
+                radv_overwrite_valid_lifetime = 3600;
+                radv_overwrite_flags = no;
+                radv_set_mflag = no;
+                radv_set_oflag = yes;
+                dhcpv6wanmode = dhcpv6wanmode_statefull;
+        }
+}
+
+
+dhcpserver {
+        saveinterval = 1h;
+        generic {
+                default_lease_time = 10d;
+                max_lease_time = 13d;
+        }
+}
+
+
+dhcpclient {
+        metric = 9;
+}
+
+
+dnsserver {
+        cache_maxKB = 16;
+        negative_ttl = 5m;
+}
+
+
+ddns {
+        accounts {
+                enabled = no;
+                domain = "";
+                iface = 0;
+                username = "";
+                passwd = "";
+                ddnsprovider = "dyndns.org";
+        }
+        types {
+                type = "dyndns";
+                url = "/nic/update?system=dyndns&hostname=<domain>&myip=<ipaddr>&wildcard=NOCHG";
+        } {
+                type = "dyndns-custom";
+                url = "/nic/update?system=custom&hostname=<domain>&myip=<ipaddr>&wildcard=NOCHG";
+        } {
+                type = "dyndns-statdns";
+                url = "/nic/update?system=statdns&hostname=<domain>&myip=<ipaddr>&wildcard=NOCHG";
+        } {
+                type = "noip";
+                url = "/ducupdate.php?update=<b64>username=<username>&pass=<pass>&h[]=<domain>&ip=<ipaddr></b64>";
+        } {
+                type = "2mydns";
+                url = "/dyn.asp?username=<username>&password=<pass>&hostname=<domain>&myip=<ipaddr>";
+        } {
+                type = "dns4biz";
+                url = "/nic/update?hostname=<domain>&myip=<ipaddr>";
+        } {
+                type = "selfhost";
+                url = "/nic/update?myip=<ipaddr>&host=<domain>&textmodi=1&http_status=1";
+        } {
+                type = "strato";
+                url = "/nic/update?hostname=<domain>";
+        } {
+                type = "userdefined";
+                url = "";
+        } {
+                type = "TZO";
+                url = "/webclient/tzoperl.html?TZOName=<domain>&Email=<username>&TZOKey=<pass>&IPAddress=<ipaddr>&system=tzodns&info=1";
+        } {
+                type = "namemaster";
+                url = "/dyn.php?username=<username>&password=<pass>&hostname=<domain>";
+        }
+        provider {
+                name = "dyndns.org";
+                type = "dyndns";
+                livedelay = 0w;
+                touchtime = 30d;
+                server = "members.dyndns.org";
+                infourl = "http://www.dyndns.org/";
+        } {
+                name = "dyndns.org-custom";
+                type = "dyndns-custom";
+                livedelay = 0w;
+                touchtime = 30d;
+                server = "members.dyndns.org";
+                infourl = "http://www.dyndns.org/";
+        } {
+                name = "dyndns.org-statdns";
+                type = "dyndns-statdns";
+                livedelay = 0w;
+                touchtime = 30d;
+                server = "members.dyndns.org";
+                infourl = "http://www.dyndns.org/";
+        } {
+                name = "No-IP.com";
+                type = "noip";
+                livedelay = 4m;
+                touchtime = 0w;
+                server = "dynupdate.no-ip.com:8245";
+                infourl = "http://www.no-ip.com/";
+        } {
+                name = "2myDNS";
+                type = "2mydns";
+                livedelay = 0w;
+                touchtime = 0w;
+                server = "dyn.2mydns.com";
+                infourl = "http://www.2mydns.com/";
+        } {
+                name = "DNS4BIZ.DE Premium";
+                type = "dns4biz";
+                livedelay = 0w;
+                touchtime = 0w;
+                server = "au-eu.dns4biz.net";
+                infourl = "http://www.dns4biz.com/services_avm.php3";
+        } {
+                name = "DNS4BIZ.DE Business";
+                type = "dns4biz";
+                livedelay = 0w;
+                touchtime = 0w;
+                server = "au-eu.dns4biz.biz";
+                infourl = "http://www.dns4biz.com/services_avm.php3";
+        } {
+                name = "selfhost.de";
+                type = "selfhost";
+                livedelay = 0w;
+                touchtime = 0w;
+                server = "carol.selfhost.de";
+                infourl = "http://www.selfhost.de";
+        } {
+                name = "STRATO AG";
+                type = "strato";
+                livedelay = 4m;
+                touchtime = 0w;
+                server = "dyndns.strato.com";
+                infourl = "http://www.strato.de/webhosting/index.html";
+        } {
+                name = "User-defined";
+                type = "userdefined";
+                livedelay = 4m;
+                touchtime = 0w;
+                server = "";
+                infourl = "http://";
+        } {
+                name = "TZO.com";
+                type = "TZO";
+                livedelay = 0w;
+                touchtime = 0w;
+                server = "rh.tzo.com";
+                infourl = "http://www.tzo.com";
+        } {
+                name = "namemaster.de";
+                type = "namemaster";
+                livedelay = 0w;
+                touchtime = 0w;
+                server = "dynup.de";
+                infourl = "http://www.namemaster.de";
+        }
+}
+
+
+webui {
+        username = "";
+        password = "";
+        expertmode = yes;
+        wizard_completed = no;
+        event_filter = 1;
+        read_access_without_login = no;
+        cookie = "1";
+}
+
+
+fminiframework {
+        enabled = no;
+        converted = yes;
+}
+
+
+capiovertcp {
+        enabled = no;
+        maxctrl = 1;
+        port = 5031;
+}
+
+
+emailnotify {
+        enabled = no;
+        interval = daily;
+        From = "";
+        To = "";
+        SMTPServer = "";
+        accountname = "";
+        passwd = "";
+        show_eventlist = no;
+        show_voipstat = no;
+        show_kidsstat = yes;
+        show_onlinecntstat = yes;
+        show_fonstat = yes;
+        starttls = yes;
+        dsl_pushmail_mode = 0;
+}
+
+
+night_time_control {
+        enabled = no;
+        time_on = "";
+        time_off = "";
+        ring_blocked = no;
+}
+
+
+ntpclient {
+        server_list = "0.europe.pool.ntp.org";
+}
+
+
+led {
+        infoled_reason = 4;
+}
+
+
+timezone_manual {
+        enabled = yes;
+        offset = -120;
+        dst_enabled = yes;
+        TZ_string = "XXX-3";
+        name = "";
+}
+
+
+mrouter {
+        igmp_version_for_upstream = 3;
+        igmp_version_for_other = 3;
+        igmp_prio = 48;
+}
+
+
+rip {
+}
+
+
+cpu_schedule {
+        dsl_token = 5000;
+        lan_token = 20000;
+}
+
+
+TR_064 {
+        enabled = yes;
+        username = "dslf-config";
+        persistent_data = "";
+}
+
+
+landevices {
+}
+
+
+prios {
+        profiles {
+                name = "profile_http";
+                rules = "TCP 80 0 0 0";
+        } {
+                name = "profile_ftp";
+                rules = "TCP 20 21 0 0";
+        } {
+                name = "profile_emule";
+                rules = "TCP 0 0 4662 0", "UDP 0 0 4672 0";
+        } {
+                name = "profile_torrent";
+                rules = "TCP 0 0 6881 6999";
+        } {
+                name = "profile_rdp";
+                rules = "TCP 3389 0 0 0";
+        } {
+                name = "profile_ssh";
+                rules = "TCP 0 0 22 0";
+        } {
+                name = "profile_telnet";
+                rules = "TCP 0 0 23 0";
+        }
+}
+
+
+nqos {
+        version = 3;
+        macaddr_whitelist_enabled = no;
+        bridge_with_switch_separation = yes;
+        defaultresult {
+                tos = -1;
+                vlan_prio = -1;
+                queueref = "default";
+        }
+        appls {
+                enabled = yes;
+                name = "sip-appl";
+                protocol = qos_classifier_appl_sip;
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hrealtime";
+                }
+        }
+        classifiers {
+                enabled = yes;
+                name = "igmp";
+                type = qos_cfg_hidden;
+                iface = qos_local;
+                rule = "localmark none ip.proto == igmp";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "ifacectl";
+                }
+        } {
+                enabled = yes;
+                name = "tr069";
+                type = qos_cfg_hidden;
+                iface = qos_local;
+                rule = "localmark sipdns,ntpdns,tr069dns,tr069";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hprio";
+                }
+        } {
+                enabled = yes;
+                name = "mstv";
+                type = qos_cfg_hidden;
+                iface = qos_lan;
+                rule = "udp.dport 43962";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hprio";
+                }
+        } {
+                enabled = yes;
+                name = "mstv";
+                type = qos_cfg_hidden;
+                iface = qos_lan;
+                rule = "udp.dport 47806";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hprio";
+                }
+        } {
+                enabled = yes;
+                name = "icmp";
+                type = qos_cfg_hidden;
+                iface = qos_lan;
+                rule = "ip.proto icmp";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hprio";
+                }
+        } {
+                enabled = yes;
+                name = "dns";
+                type = qos_cfg_hidden;
+                iface = qos_lan;
+                rule = "udp.dport 53";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hprio";
+                }
+        } {
+                enabled = yes;
+                name = "clfy_voip";
+                type = qos_cfg_internal;
+                iface = qos_local;
+                rule = "localmark sip";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hrealtime";
+                }
+        } {
+                enabled = yes;
+                name = "clfy_voip";
+                type = qos_cfg_internal;
+                iface = qos_local;
+                rule = "localmark rtp";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hrealtime";
+                }
+        } {
+                enabled = yes;
+                name = "clfy_voip";
+                type = qos_cfg_internal;
+                iface = qos_lan;
+                rule = "udp.dport 5060";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hrealtime";
+                        applref = "sip-appl";
+                }
+        } {
+                enabled = yes;
+                name = "clfy_fmedia";
+                type = qos_cfg_internal;
+                iface = qos_lan;
+                rule = "dhcpoption 12 FRITZ!Media* mediatab";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "realtime";
+                }
+        } {
+                enabled = yes;
+                name = "clfy_fmedia";
+                type = qos_cfg_internal;
+                iface = qos_lan;
+                rule = "ethsrctab mediatab";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "realtime";
+                }
+        } {
+                enabled = no;
+                name = "clfy_www";
+                type = qos_cfg_system;
+                iface = qos_lan;
+                rule = "ip.proto == tcp ip.len <= 64";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "none";
+                }
+        } {
+                enabled = no;
+                name = "clfy_www";
+                type = qos_cfg_system;
+                iface = qos_lan;
+                rule = "tcp.dest 80 ip.len <= 800";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "none";
+                }
+        } {
+                enabled = no;
+                name = "clfy_www";
+                type = qos_cfg_system;
+                iface = qos_lan;
+                rule = "tcp.dest 8080 ip.len <= 800";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "none";
+                }
+        } {
+                enabled = no;
+                name = "clfy_www";
+                type = qos_cfg_system;
+                iface = qos_lan;
+                rule = "tcp.dest 3128 ip.len <= 800";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "none";
+                }
+        } {
+                enabled = yes;
+                name = "webdav";
+                type = qos_cfg_hidden;
+                iface = qos_local;
+                rule = "localmark webdav";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "low";
+                }
+        } {
+                enabled = yes;
+                name = "icmp-v6";
+                type = qos_cfg_hidden;
+                iface = qos_lan;
+                rule = "ip.proto IPv6-ICMP";
+                result {
+                        tos = -1;
+                        vlan_prio = -1;
+                        queueref = "hprio";
+                }
+        }
+        queues {
+                enabled = yes;
+                with_sfq = no;
+                type = qos_cfg_system;
+                name = "ifacectl";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 0;
+                weight = 0;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        } {
+                enabled = yes;
+                with_sfq = no;
+                type = qos_cfg_system;
+                name = "hprio";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 10;
+                weight = 0;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        } {
+                enabled = yes;
+                with_sfq = no;
+                type = qos_cfg_system;
+                name = "hrealtime";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 20;
+                weight = 0;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        } {
+                enabled = yes;
+                with_sfq = yes;
+                type = qos_cfg_system;
+                name = "realtime";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 30;
+                weight = 0;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        } {
+                enabled = yes;
+                with_sfq = yes;
+                type = qos_cfg_system;
+                name = "important";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 100;
+                weight = 90;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        } {
+                enabled = yes;
+                with_sfq = yes;
+                type = qos_cfg_system;
+                name = "default";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 100;
+                weight = 10;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        } {
+                enabled = yes;
+                with_sfq = yes;
+                type = qos_cfg_system;
+                name = "low";
+                iface = qos_wan;
+                queue_type = queue_llq;
+                precedence = 200;
+                weight = 0;
+                shapingrate = 0;
+                shapingburst = 0;
+                allow_more = yes;
+                ceilrate = 0;
+        }
+}
+
+
+ethernet_eco {
+        eth0_mode = 2;
+        eth1_mode = 1;
+        eth2_mode = 1;
+        eth3_mode = 1;
+}
+
+
+unattended_update {
+        update_found = no;
+        running_version = "";
+        no_update_found_time = "2011-02-04 03:24:29";
+        priority = 1;
+        check_intervall = 168;
+}
+
+
+avmlogd {
+        enabled = no;
+}
+
+
+provider_default {
+}
+
+
+// EOF
+
+**** END OF FILE ****
+**** CFGFILE:voip.cfg
+/*
+ * /var/flash/voip.cfg
+ * Sat Jan  1 01:31:03 2000
+ */
+
+voipcfg {
+        dnsport = 7077;
+        rtpport_start = 7078;
+        sip_srcport = 5060;
+        ua1 {
+                enabled = no;
+                username = "$$$$FO6YVC6SVU44SWTEFADZGWLU6ADQJUPDEA5VKJIHHNQADAN2NJFSGRSN6XYMXHBOYH3E2JSSYGXP5AAA";
+                authname = "$$$$Y4WVLWKLXDJCTZERWNXYGYFKLT4DU1HNOCJGYL2SRFZX2KHIY6WNS3KSDYHEN26NRPHIW5BH1I6TEAAA";
+                passwd = "$$$$ZTU4J4ONMWUDZ1AI3ZCMF4GJQQCCEBI2G5EEUUVWGPDSMEI3HOJCCXJLHYOWH5RVZH65WDWGKSWKOAAA";
+                registrar = "ngn.hol.net";
+                ttl = 30m;
+                sipping_enabled = no;
+                sipping_interval = 280s;
+                name = "DN1";
+                with_displayname = no;
+                dtmfcfg = dtmfcfg_rtp_or_inband;
+                register_failwaitmax = 30m;
+                stunserver = "";
+                stunserverport = 3478;
+                use_internat_calling_numb = no;
+                is_nat_aware = no;
+                localip = 0.0.0.0;
+                ignore_received_header = no;
+                always_clir = no;
+                clirtype = clir_display_and_username;
+                colptype = colp_none;
+                only_one_dialog = no;
+                presence_supported = no;
+                mwi_supported = no;
+                ccbs_supported = no;
+                reg_support = regsupport_no;
+                packetization = packetization_fixed;
+                tx_packetsize_in_ms = 20;
+                xrtp_periodic = 0;
+                reject_refer = yes;
+                no_register_fetch = yes;
+                do_not_register = no;
+                only_call_from_registrar = no;
+                outboundproxy = "ngn.hol.net";
+                outboundproxy_without_route_header = no;
+                dditype = ddi_none;
+                ddireception = "";
+                backup_wanted = no;
+                use_session_timer = no;
+                use_rport = yes;
+                add_rtpmap_for_all_codecs = yes;
+                answer_only_one_codec = no;
+                without_annexb_no = no;
+                srtp_supported = no;
+                use_488_for_no_t38 = no;
+                g726_via_rfc3551 = no;
+        }
+        ua2 {
+                enabled = no;
+                username = "$$$$GXYQS3WZCFMB2U1N34MOFDYTCEXZIJP1IZI45SO4GYDU4JMRNBR2526FFX65NJ2TI53YRV2BNMLU5AAA";
+                authname = "$$$$QLODEOSITLDKTUFXWJBJBQ31VZJPEDGPVKE4VDMVEPTRUFMJXEXH5W2CMCCPRJWDLQQFGVMVYMDQIAAA";
+                passwd = "$$$$LAAJAAOQJCZRFWDWVSDA2FA26PA5UN6TNKH3LUBCGNSRLP1Q2P1KFJ6FTZO63MGBLD5XG22P152I5AAA";
+                registrar = "ngn.hol.net";
+                ttl = 30m;
+                sipping_enabled = no;
+                sipping_interval = 280s;
+                name = "DN2";
+                with_displayname = no;
+                dtmfcfg = dtmfcfg_rtp_or_inband;
+                register_failwaitmax = 30m;
+                stunserver = "";
+                stunserverport = 3478;
+                use_internat_calling_numb = no;
+                is_nat_aware = no;
+                localip = 0.0.0.0;
+                ignore_received_header = no;
+                always_clir = no;
+                clirtype = clir_display_and_username;
+                colptype = colp_none;
+                only_one_dialog = no;
+                presence_supported = no;
+                mwi_supported = no;
+                ccbs_supported = no;
+                reg_support = regsupport_no;
+                packetization = packetization_fixed;
+                tx_packetsize_in_ms = 20;
+                xrtp_periodic = 0;
+                reject_refer = yes;
+                no_register_fetch = yes;
+                do_not_register = no;
+                only_call_from_registrar = no;
+                outboundproxy = "ngn.hol.net";
+                outboundproxy_without_route_header = no;
+                dditype = ddi_none;
+                ddireception = "";
+                backup_wanted = no;
+                use_session_timer = no;
+                use_rport = yes;
+                add_rtpmap_for_all_codecs = yes;
+                answer_only_one_codec = no;
+                without_annexb_no = no;
+                srtp_supported = no;
+                use_488_for_no_t38 = no;
+                g726_via_rfc3551 = no;
+        }
+        use_audiocodecs = yes;
+        audiocodecs = "PCMA", "G729";
+        verbose = no;
+        sip_prio = 46;
+        rtp_prio = 46;
+        dyn_codecs = yes;
+        prio_low_codec = no;
+        send_ringtone = no;
+        t38_support_enabled = no;
+        enum_support_enabled = no;
+        bandwidth_to_leave_KBits = 0;
+        dialoglimit = 0;
+        enumdomains = "e164.arpa", "e164.org";
+        rtpstream {
+                voice_activity_detection {
+                        enabled = no;
+                        vad_threshold = 10000;
+                }
+                plc {
+                        in_the_stack = yes;
+                }
+                jitter {
+                        auto_on = yes;
+                        in_ms = 50;
+                        in_packets = 0;
+                }
+                rtcp_enabled = yes;
+                silence_detection = no;
+        }
+        voip_assi_enabled = no;
+        onlinetel {
+                enabled = no;
+        }
+}
+
+
+// EOF
+
+**** END OF FILE ****
+**** CFGFILE:tr069.cfg
+/*
+ * /var/flash/tr069.cfg
+ * Sat Jan  1 01:31:03 2000
+ */
+
+tr069cfg {
+        enabled = yes;
+        litemode = no;
+        igd {
+                DeviceInfo {
+                        ProvisioningCode = "Hellas_Online";
+                        FirstUseDate = "1970-01-01 01:00:00";
+                }
+                managementserver {
+                        url = "http://acs.hol.gr/live/CPEManager/CPEs/pirelli/Auth_Basic/";
+                        username = "$$$$6DPCXP3KRPZK1O5ZLJSCQB3TLGVGIMMNI13IRMYNPYSFQD5TJSUP4U6YXHOV63RPSZBITCJDKPPUYAAA";
+                        password = "$$$$3SI2G23DMCVFZOQOQXBKDXRWTGBMXPROBFIEZF2BJJI1MZIMGHB5RSDHMH14V3MFAOK64LJXCLHL5AAA";
+                        URLAlreadyContacted = yes;
+                        URLbyDHCPIface = "";
+                        PeriodicInformEnable = yes;
+                        PeriodicInformInterval = 86400;
+                        PeriodicInformTime = "1970-01-01 01:00:00";
+                        UpgradesManaged = no;
+                        ACSInitiationEnable = yes;
+                        ConnectionRequestUsername = "";
+                        ConnectionRequestPassword = "";
+                }
+        }
+        FirmwareDownload {
+                enabled = yes;
+                enabled_converted = no;
+                valid = no;
+                suppress_notify = no;
+                CommandKey = "";
+                status = 0;
+                StartTime = "1970-01-01 01:00:00";
+                CompleteTime = "1970-01-01 01:00:00";
+                method = Download_Method_DL;
+        }
+        RebootRequest = no;
+        RebootRequest_CommandKey = "";
+}
+
+
+// EOF
+
+**** END OF FILE ****
+**** BINFILE:fx_cg
+000B02080D0C00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+**** END OF FILE ****
+**** BINFILE:fx_conf
+53560003000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000550B0000000000000000000C0B000000000000000000000000
+00000000000000000000000000000000010101010000010001010101000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000001000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF30303030
+10000000100000001000000010000000020000000200000002000000020000000000000000000000
+00000000000000000000000000000000000000000000000006000000060000000600000006000000
+01000000010000000100000001000000FFFFFFFFFFFFFFFFFFFFFFFF000000003030303030303030
+303030303030303030303030303030303030303030303030003100FFFFFF0000000001010101FFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FF
+01010101FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF02010100000101010101010101FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+2130302A303023232A232323302330233123333023302330302331236F7468657223FFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2130302A303023232A232323302330233123333023302330
+302331236F7468657223FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000444E310000000000000000000000000000000000
+00444E32000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+01010101010101010101FFFFFFFFFFFFFFFFFFFF0000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000003430302A23302A33
+30232A333023302A333023302A3023302A303033302323312330233023333023312330302330236F
+7468657223333023312330302330236F7468657223FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFF0101FFFFFFFFFFFF000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF01FFFFFFFFFF
+FFFFFF00000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000FFFFFFFFFF00FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000FFFFFFFF
+**** END OF FILE ****
+**** BINFILE:fx_def
+5356000302FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+**** END OF FILE ****
+**** BINFILE:fx_lcr
+03000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000F0F0F0F0F0F0F0F0F0F0F0F0
+F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F1F1F1F1
+F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1
+F1F1F1F1F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2F2
+F2F2F2F2F2F2F2F2F2F2F2F2F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3
+F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4
+F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F4F5F5F5F5F5F5F5F5F5F5F5F5
+F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F5F6F6F6F6
+F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6F6
+F6F6F6F6F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7
+F7F7F7F7F7F7F7F7F7F7F7F7F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8
+F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9
+F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000FF0000010000000000000000000000000000000400FF000002000000
+0000000000000000000000000000FF00000000030000000000000000000000000000000000000000
+00000000000000000000000000000000FF0000000000000000000000000000000000000500FF0000
+000000000000000000000000000000000600000000000000000000000000000000000000000000FF
+**** END OF FILE ****
+**** BINFILE:telefon_misc
+0000000000000000000000000000000000000000000000FEFF000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000005C89BD2A5085BD2A3057B07F9015D62AA804C22A80E1D52A
+30C2BF2A6407C92A8C0BC92A0000000090C5C72A0050C72AD044CB2A5CE1D52AD044CB2A0050C72A
+00C3CA2A78DFC82A8C0BC92AACF1C12A00701E2B00000000D044CB2A000000000000000060E2D52A
+9415D62ADC1DCF2AD044CB2A6407C92A8C0BC92A3021CF2A2065D62AFFFFFFFFD08DD02A44E1D52A
+0000000000000000D08DD02A5CE1D52A00000000000000008857B07F40BE252B0000000000000000
+02000000D437D62A5C82CE2A4C82CE2A0038D62A40BE252B000000003412CF2A2065D62AF857B07F
+D08DD02A44E1D52A0000000000000000D08DD02A44E1D52A0000000000000000DC37D62A01000000
+0038D62AA0010000B8D1CF2AD8D1CF2A000000000000000000000000000000002065D62A00000000
+F437D62A0100000024EED52AD437D62ACC01000000000000C037D62AFF00000020EED52A100DFA2A
+6419E22A84D2CF2A40BE252B6419E22A0200000000000000C037D62AD437D62ACC010000E058B07F
+20EED52AD437D62A2065D62A00000000B0DACF2A58DACF2A00000000000000000000000000000000
+CC010000E058B07F20EED52A000000002065D62A0000000000000000000000000000000000000000
+D044CB2A000000005E00000019000000D050C92AB850C92A06000000190000004053C92A2853C92A
+D044CB2A0000000000000000FFFFFFFF00B0E32A00B0E32A2859B07F0C2DDF2A0000000019000000
+D044CB2A402CDF2A1F00000019000000D050C92AB850C92A07000000190000004053C92A2853C92A
+D044CB2AFF00000000000000602FDF2A00B0E32A00B0E32AD85CB07F0C2DDF2A0000000019000000
+00B0E22A402CDF2A80B2E32A0000000000B0DE2AD4CCDE2A00B0E22A8638E42A805EAB2AFF000000
+00000000100DFA2AC04D1E2BD0ACDF2A000000000000000000000000000000000100000001000000
+000000000000000080B2E32A00000000FF0FFF000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000002065D62A00000000
+08000000080000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000002065D62A00000000080000000800000000000000141EE22A0000000000000000
+FFFFFFFFD059232B2065D62A685CB07F00000000C3BAD42A685CB07F000000009424CF2A00000000
+F6FFFFFF570000002065D62A105DB07F20FFFFFF0E5CB07FF6FFFFFF0E5CB07F0100000060D0CE2A
+00000000000000000000000000000000F6FFFFFF570000002065D62A00000000161EE22AFFFFFFFF
+00000000640000000000000020000000000000000100000006000000000001000000000008000000
+08000000080000000800000008000000080000000800000008000000145DB07F0100000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000048081F2BB05BB07F48081F2B0050C72A
+80F40E2B00651E2B1050AC2A0050C72A1050AC2A6407C92A28081F2BD85BB07F28081F2B0050C72A
+80F40E2B00651E2B90C5C72A0050C72A0E0000000050C72A00B0E22AAC5CB07F90C5C72A08061F2B
+170000000050C72A28081F2B9429E32A28081F2B08061F2B0000000080F40E2B90C5C72AACF1C12A
+E0641E2B385CB07FE0641E2B0050310001000000305BB07F0000000001000000200000006407C92A
+635A232B9CA5DCD4141EE22A105DB07FFFFFFFFFD059232B00000000100DFA2AD044CB2A4097CE2A
+0101000019000000D050C92AB850C92A90C5C754656C65666F6E2031300000000000000000000000
+000000000000000000000054656C65666F6E20310000000000000000000000000000000000000000
+00000054656C65666F6E2032000000000000000000000000000000000000000000000054656C6566
+6F6E2033000000000000000000000000000000000000000000000054656C65666F6E203400000000
+0000000000000000000000000000000000000054656C65666F6E2035000000000000000000000000
+000000000000000000000054656C65666F6E20360000000000000000000000000000000000000000
+00000054656C65666F6E2037000000000000000000000000000000000000000000000054656C6566
+6F6E2038000000000000000000000000000000000000000000000052756E64727566000000000000
+00000000000000000000000000000000000000466F6E203100000000000000000000000000000000
+0000000000000000000000466F6E2032000000000000000000000000000000000000000000000000
+000000466F6E2033000000000000000000000000000000000000000000000000000000466F6E2034
+00000000000000000000000000000000000000000000000000000000000000000001000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000010000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000FF0000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000004E554C4C000000000000000000000000000000
+00004E554C4C00000000000000000000000000000000004E554C4C00000000000000000000000000
+000000004E554C4C00000000000000000000000000000000004E554C4C0000000000000000000000
+0000000000004E554C4C00000000000000000000000000000000004E554C4C000000000000000000
+00000000000000004E554C4C00000000000000000000000000000000004E554C4C00000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000
+**** END OF FILE ****
+**** BINFILE:phonebook
+3C3F786D6C0A76657273696F6E3D22312E302220656E636F64696E673D2269736F2D383835392D31
+223E3C70686F6E65626F6F6B202F3E3C70686F6E65626F6F6B206F776E65723D22323535223E3C63
+6F6E746163743E3C63617465676F7279202F3E3C706572736F6E3E3C7265616C4E616D653E416C61
+726D636C6F636B20313C2F7265616C4E616D653E3C2F706572736F6E3E3C74656C6570686F6E793E
+3C6E756D6265723E34313C2F6E756D6265723E3C2F74656C6570686F6E793E3C7365727669636573
+202F3E3C7365747570202F3E3C2F636F6E746163743E3C636F6E746163743E3C63617465676F7279
+202F3E3C706572736F6E3E3C7265616C4E616D653E416C61726D636C6F636B20323C2F7265616C4E
+616D653E3C2F706572736F6E3E3C74656C6570686F6E793E3C6E756D6265723E34323C2F6E756D62
+65723E3C2F74656C6570686F6E793E3C7365727669636573202F3E3C7365747570202F3E3C2F636F
+6E746163743E3C636F6E746163743E3C63617465676F7279202F3E3C706572736F6E3E3C7265616C
+4E616D653E416C61726D636C6F636B20333C2F7265616C4E616D653E3C2F706572736F6E3E3C7465
+6C6570686F6E793E3C6E756D6265723E34333C2F6E756D6265723E3C2F74656C6570686F6E793E3C
+7365727669636573202F3E3C7365747570202F3E3C2F636F6E746163743E3C636F6E746163743E3C
+63617465676F7279202F3E3C706572736F6E3E3C7265616C4E616D653E416C6C20496E7465726E61
+6C3C2F7265616C4E616D653E3C2F706572736F6E3E3C74656C6570686F6E793E3C6E756D6265720A
+747970653D22696E7465726E223E393C2F6E756D6265723E3C2F74656C6570686F6E793E3C736572
+7669636573202F3E3C7365747570202F3E3C2F636F6E746163743E3C636F6E746163743E3C636174
+65676F7279202F3E3C706572736F6E3E3C7265616C4E616D653E416E73776572696E67206D616368
+696E6520313C2F7265616C4E616D653E3C2F706572736F6E3E3C74656C6570686F6E793E3C6E756D
+6265720A747970653D22696E7465726E223E3630303C2F6E756D6265723E3C2F74656C6570686F6E
+793E3C7365727669636573202F3E3C7365747570202F3E3C2F636F6E746163743E3C636F6E746163
+743E3C63617465676F7279202F3E3C706572736F6E3E3C7265616C4E616D653E466F6E20313C2F72
+65616C4E616D653E3C2F706572736F6E3E3C74656C6570686F6E793E3C6E756D6265720A74797065
+3D22696E7465726E223E313C2F6E756D6265723E3C2F74656C6570686F6E793E3C73657276696365
+73202F3E3C7365747570202F3E3C2F636F6E746163743E3C636F6E746163743E3C63617465676F72
+79202F3E3C706572736F6E3E3C7265616C4E616D653E466F6E20323C2F7265616C4E616D653E3C2F
+706572736F6E3E3C74656C6570686F6E793E3C6E756D6265720A747970653D22696E7465726E223E
+323C2F6E756D6265723E3C2F74656C6570686F6E793E3C7365727669636573202F3E3C7365747570
+202F3E3C2F636F6E746163743E3C636F6E746163743E3C63617465676F7279202F3E3C706572736F
+6E3E3C7265616C4E616D653E4953444E2F4445435420616C6C3C2F7265616C4E616D653E3C2F7065
+72736F6E3E3C74656C6570686F6E793E3C6E756D6265720A747970653D22696E7465726E223E3530
+3C2F6E756D6265723E3C2F74656C6570686F6E793E3C7365727669636573202F3E3C736574757020
+2F3E3C2F636F6E746163743E3C2F70686F6E65626F6F6B3E0A
+**** END OF FILE ****
+**** BINFILE:calllog
+
+**** END OF FILE ****
+**** BINFILE:fonctrl
+3C3F786D6C0A76657273696F6E3D22312E302220656E636F64696E673D2269736F2D383835392D31
+223E0A3C706572736F6E3E0A3C69643E303C2F69643E0A3C646576696365747970653E303C2F6465
+76696365747970653E0A3C696E7465726E3E3C2F696E7465726E3E0A3C666E616D653E3C2F666E61
+6D653E0A3C6E6F72696E673E0A3C6E6F72696E675F6D6F64653E363C2F6E6F72696E675F6D6F6465
+3E0A3C6E6F72696E675F73746172743E303C2F6E6F72696E675F73746172743E0A3C6E6F72696E67
+5F656E643E303C2F6E6F72696E675F656E643E3C2F6E6F72696E673E0A3C72696E676F6E616C6C6D
+736E733E303C2F72696E676F6E616C6C6D736E733E0A3C636C69723E303C2F636C69723E0A3C7762
+5F656E61626C653E303C2F77625F656E61626C653E0A3C63616C6C5F77616974696E673E303C2F63
+616C6C5F77616974696E673E0A3C6C6F776761696E3E303C2F6C6F776761696E3E0A3C6D65646761
+696E3E303C2F6D65646761696E3E0A3C686967686761696E3E303C2F686967686761696E3E0A3C69
+6E745F72696E675F746F6E653E303C2F696E745F72696E675F746F6E653E0A3C7669705F72696E67
+5F746F6E653E303C2F7669705F72696E675F746F6E653E0A3C616C61726D315F72696E675F746F6E
+653E303C2F616C61726D315F72696E675F746F6E653E0A3C616C61726D325F72696E675F746F6E65
+3E303C2F616C61726D325F72696E675F746F6E653E0A3C616C61726D335F72696E675F746F6E653E
+303C2F616C61726D335F72696E675F746F6E653E0A3C70686F6E65626F6F6B5F6E723E303C2F7068
+6F6E65626F6F6B5F6E723E0A3C6D736E6C6973743E0A3C6D736E20747970653D2230222072696E67
+746F6E653D2230223E3C2F6D736E3E0A3C6D736E20747970653D2230222072696E67746F6E653D22
+30223E3C2F6D736E3E0A3C6D736E20747970653D2230222072696E67746F6E653D2230223E3C2F6D
+736E3E0A3C6D736E20747970653D2230222072696E67746F6E653D2230223E3C2F6D736E3E0A3C6D
+736E20747970653D2230222072696E67746F6E653D2230223E3C2F6D736E3E0A3C6D736E20747970
+653D2230222072696E67746F6E653D2230223E3C2F6D736E3E0A3C6D736E20747970653D22302220
+72696E67746F6E653D2230223E3C2F6D736E3E0A3C6D736E20747970653D2230222072696E67746F
+6E653D2230223E3C2F6D736E3E0A3C6D736E20747970653D2230222072696E67746F6E653D223022
+3E3C2F6D736E3E0A3C6D736E20747970653D2230222072696E67746F6E653D2230223E3C2F6D736E
+3E0A3C2F6D736E6C6973743E0A3C6F7574676F696E675F63616C6C73202F3E0A3C696E636F6D696E
+675F63616C6C73202F3E0A3C616E7377657265645F63616C6C73202F3E0A3C2F706572736F6E3E0A
+3C656D61696C206269746D61703D2230223E0A3C7365727665723E3C2F7365727665723E0A3C7573
+65723E3C2F757365723E0A3C706173733E3C2F706173733E0A3C706F72743E303C2F706F72743E0A
+3C6E616D653E3C2F6E616D653E0A3C706F6C6C3E3930303C2F706F6C6C3E0A3C64656C6574653E30
+3C2F64656C6574653E0A3C6D77693E303C2F6D77693E3C2F656D61696C3E0A3C656D61696C206269
+746D61703D2230223E0A3C7365727665723E3C2F7365727665723E0A3C757365723E3C2F75736572
+3E0A3C706173733E3C2F706173733E0A3C706F72743E303C2F706F72743E0A3C6E616D653E3C2F6E
+616D653E0A3C706F6C6C3E3930303C2F706F6C6C3E0A3C64656C6574653E303C2F64656C6574653E
+0A3C6D77693E303C2F6D77693E3C2F656D61696C3E0A3C656D61696C206269746D61703D2230223E
+0A3C7365727665723E3C2F7365727665723E0A3C757365723E3C2F757365723E0A3C706173733E3C
+2F706173733E0A3C706F72743E303C2F706F72743E0A3C6E616D653E3C2F6E616D653E0A3C706F6C
+6C3E3930303C2F706F6C6C3E0A3C64656C6574653E303C2F64656C6574653E0A3C6D77693E303C2F
+6D77693E3C2F656D61696C3E0A3C656D61696C206269746D61703D2230223E0A3C7365727665723E
+3C2F7365727665723E0A3C757365723E3C2F757365723E0A3C706173733E3C2F706173733E0A3C70
+6F72743E303C2F706F72743E0A3C6E616D653E3C2F6E616D653E0A3C706F6C6C3E3930303C2F706F
+6C6C3E0A3C64656C6574653E303C2F64656C6574653E0A3C6D77693E303C2F6D77693E3C2F656D61
+696C3E0A3C656D61696C206269746D61703D2230223E0A3C7365727665723E3C2F7365727665723E
+0A3C757365723E3C2F757365723E0A3C706173733E3C2F706173733E0A3C706F72743E303C2F706F
+72743E0A3C6E616D653E3C2F6E616D653E0A3C706F6C6C3E3930303C2F706F6C6C3E0A3C64656C65
+74653E303C2F64656C6574653E0A3C6D77693E303C2F6D77693E3C2F656D61696C3E0A3C656D6169
+6C206269746D61703D2230223E0A3C7365727665723E3C2F7365727665723E0A3C757365723E3C2F
+757365723E0A3C706173733E3C2F706173733E0A3C706F72743E303C2F706F72743E0A3C6E616D65
+3E3C2F6E616D653E0A3C706F6C6C3E3930303C2F706F6C6C3E0A3C64656C6574653E303C2F64656C
+6574653E0A3C6D77693E303C2F6D77693E3C2F656D61696C3E0A3C656D61696C206269746D61703D
+2230223E0A3C7365727665723E3C2F7365727665723E0A3C757365723E3C2F757365723E0A3C7061
+73733E3C2F706173733E0A3C706F72743E303C2F706F72743E0A3C6E616D653E3C2F6E616D653E0A
+3C706F6C6C3E3930303C2F706F6C6C3E0A3C64656C6574653E303C2F64656C6574653E0A3C6D7769
+3E303C2F6D77693E3C2F656D61696C3E0A3C656D61696C206269746D61703D2230223E0A3C736572
+7665723E3C2F7365727665723E0A3C757365723E3C2F757365723E0A3C706173733E3C2F70617373
+3E0A3C706F72743E303C2F706F72743E0A3C6E616D653E3C2F6E616D653E0A3C706F6C6C3E393030
+3C2F706F6C6C3E0A3C64656C6574653E303C2F64656C6574653E0A3C6D77693E303C2F6D77693E3C
+2F656D61696C3E0A3C656D61696C206269746D61703D2230223E0A3C7365727665723E3C2F736572
+7665723E0A3C757365723E3C2F757365723E0A3C706173733E3C2F706173733E0A3C706F72743E30
+3C2F706F72743E0A3C6E616D653E3C2F6E616D653E0A3C706F6C6C3E3930303C2F706F6C6C3E0A3C
+64656C6574653E303C2F64656C6574653E0A3C6D77693E303C2F6D77693E3C2F656D61696C3E0A3C
+656D61696C206269746D61703D2230223E0A3C7365727665723E3C2F7365727665723E0A3C757365
+723E3C2F757365723E0A3C706173733E3C2F706173733E0A3C706F72743E303C2F706F72743E0A3C
+6E616D653E3C2F6E616D653E0A3C706F6C6C3E3930303C2F706F6C6C3E0A3C64656C6574653E303C
+2F64656C6574653E0A3C6D77693E303C2F6D77693E3C2F656D61696C3E0A3C727373206269746D61
+703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E30
+3C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D22
+30223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F70
+6F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E
+0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C
+3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E
+616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C
+6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D65
+3E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D7769
+3E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F
+6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C
+2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D
+653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77
+693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A
+3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C
+2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C7572
+6C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273
+733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C
+2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A
+3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F7572
+6C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C7273
+73206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A
+3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C7273732062
+69746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F
+6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D
+61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E
+303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D
+2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F
+706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D223022
+3E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C
+6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C
+6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A
+3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D
+653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77
+693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C
+2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E30
+3C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E61
+6D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D
+77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E
+0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E
+3C2F7273733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75
+726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F72
+73733E0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E
+3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E
+0A3C727373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75
+726C3E0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C72
+7373206269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E
+0A3C706F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C72737320
+6269746D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C70
+6F6C6C3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C72737320626974
+6D61703D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C
+3E303C2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D6170
+3D2230223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C
+2F706F6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230
+223E0A3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F
+6C6C3E0A3C6D77693E303C2F6D77693E3C2F7273733E0A3C727373206269746D61703D2230223E0A
+3C6E616D653E3C2F6E616D653E0A3C75726C3E3C2F75726C3E0A3C706F6C6C3E303C2F706F6C6C3E
+0A3C6D77693E303C2F6D77693E3C2F7273733E0A
+**** END OF FILE ****
+**** BINFILE:config
+8C0500007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+000000007800000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFF010000000000000000000000000000003C0000000400000004000000
+30303030000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000
+**** END OF FILE ****
+**** BINFILE:configd
+
+**** END OF FILE ****
+**** END OF EXPORT 12327E1F ****

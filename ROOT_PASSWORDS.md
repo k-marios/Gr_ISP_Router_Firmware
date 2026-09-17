@@ -44,7 +44,22 @@ Password:
 4tfbckam
 ```
 
-For firmware versions higher than and including 1.2.01.06, you must restore a settings backup file where the superuser password had previously been changed.
+For some firmware versions higher than and including 1.2.01.06, you may use the following credentials:
+
+Username:
+
+```
+superuser
+
+```
+
+Password:
+
+``` 
+h27oo$_$UP%_vf22
+```
+
+If these do not work, you must restore a settings backup file where the superuser password had previously been changed.
 
 ### ZTE 
 

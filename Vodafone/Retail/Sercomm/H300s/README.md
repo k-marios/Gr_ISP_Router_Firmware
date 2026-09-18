@@ -105,4 +105,4 @@ python3 encrypt_h300s.py new_firmware.ubi Vodafone_H300s_custom.img
 
 ## ⚠️ Disclaimer
 
-This toolkit is providedThis request was blocked by Gemini's filters. They can occasionally trigger by mistake on safe coding, security, or biology-related queries. Please try rephrasing your prompt.
+This project is intended strictly for personal research, educational purposes, and hardware auditing. Modifying firmware involves potential risks of bricking hardware.

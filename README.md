@@ -16,7 +16,7 @@
 [![HOL](https://img.shields.io/badge/HOL-E30613?style=flat&logoColor=white)](HOL/)
 [![Cyta](https://img.shields.io/badge/Cyta-792482?style=flat&logoColor=white)](Cyta/)
 
->A centralized, community-driven preservation repository archiving stock and ISP-customized firmware binaries, recovery images, and documentation for CPE routers, VoIP gateways, and modems distributed by Greek Internet Service Providers (both active and legacy).
+>A centralized, community-driven preservation repository archiving ISP-customized firmware binaries, recovery images, and documentation for CPE routers, VoIP gateways, and modems distributed by Greek Internet Service Providers (both active and legacy).
 
 ---
 
@@ -74,10 +74,10 @@ The archive is organized hierarchically by `Provider / Manufacturer / Model`.
 | Manufacturer | Model / Device Name | Technology / Type | Notes |
 | :--- | :--- | :--- | :--- |
 | **Arcadyan** | [Speedport Plus 2](Cosmote/Arcadyan/Speedport_Plus_2/) | VDSL2 / Vectoring / VoIP | ⚠️ *Do not cross-flash with Sercomm Plus 2* |
-| **Huawei** | [HA35-10](Cosmote/Huawei/HA35-10/) | VDSL2 + 4G Hybrid Access | Cosmote Home Booster (Bonded DSL + LTE) |
+| **Huawei** | [HA35-10](Cosmote/Huawei/HA35-10/) | VDSL2 + 4G Hybrid Access | Cosmote Home SpeedBooster (Bonded DSL + LTE) |
 | **Intracom** | [JetSpeed 520](Cosmote/Intracom/Jetspeed_520/) | ADSL / ADSL2+ | Annex A & Annex B images |
 | **Oxygen** | [HDI24201](Cosmote/Oxygen/HDI24201/), [HDI34201](Cosmote/Oxygen/HDI34201/) | VDSL2 / Multi-line VoIP / ISDN | Business PBX / Enterprise Gateways |
-| **Sercomm** | [Speedport Plus 1](Cosmote/Sercomm/Speedport_Plus_1/) | VDSL2 35b / Vectoring / VoIP | Stock & rollback firmware |
+| **Sercomm** | [Speedport Plus 1](Cosmote/Sercomm/Speedport_Plus_1/) | VDSL2 35b / Vectoring / VoIP | - |
 | **Sercomm** | [Speedport Plus 2](Cosmote/Sercomm/Speedport_Plus_2/) | VDSL2 / Vectoring / VoIP | ⚠️ *Do not cross-flash with Arcadyan Plus 2* |
 | **Sercomm** | [Speedport W 724V (Type Ci)](Cosmote/Sercomm/Speedport_W_724V_Type_Ci/) | VDSL2 / VoIP | Legacy Gigabit dual-band CPE |
 | **ZTE** | [Speedport Entry 2i](Cosmote/ZTE/Speedport_Entry_2i/) | VDSL2 17a / VoIP | Popular workhorse VDSL router |
@@ -95,24 +95,29 @@ Split into **Retail** (residential) and **OneNet** (business/enterprise) solutio
 #### Retail Solutions (`Vodafone/Retail/`)
 | Manufacturer | Model / Device Name | Technology / Highlights |
 | :--- | :--- | :--- |
-| **Sercomm** | [H300s](Vodafone/Retail/Sercomm/H300s/) | VDSL2 35b / VoIP / AC1600 (Multiple firmware releases) |
-| **Sercomm** | [Power Station Wi-Fi 6](Vodafone/Retail/Sercomm/Power_Station_WiFi6/) | VDSL2 35b / Wi-Fi 6 AX / VoIP (Vodafone Station 6) |
+| **AirTies** | [Super Wi-Fi Extender](Vodafone/Retail/Airties/Super_WiFi_Extender/) | Wi-Fi 6 Mesh Extender (VDF4960) |
+| **Huawei** | [H155-383](Vodafone/Retail/Huawei/H155-383/) | 5G NR / Wi-Fi 6 Gateway |
+| **Sercomm** | [H300s](Vodafone/Retail/Sercomm/H300s/) | VDSL2 35b / VoIP / AC1600 |
+| **Sercomm** | [Power Station Wi-Fi 6](Vodafone/Retail/Sercomm/Power_Station_WiFi6/) | VDSL2 35b / Wi-Fi 6 AX / VoIP |
 | **TP-Link** | [Archer VR100v](Vodafone/Retail/TP-LINK/100V/) | VDSL2 / VoIP Gateway |
-| **Vantiva** | [Ultra Hub 7](Vodafone/Retail/Vantiva/Ultra_Hub_7/) | Wi-Fi 7 / FTTH & Ultra-broadband Gateway |
+| **Vantiva** | [Ultra Hub 7](Vodafone/Retail/Vantiva/Ultra_Hub_7/) | Wi-Fi 7 / FTTH Gateway |
 | **ZTE** | [ZXHN H108N (v2.5)](Vodafone/Retail/ZTE/H108N_v2.5/) | ADSL2+ |
 | **ZTE** | [ZXHN H208N](Vodafone/Retail/ZTE/H208N/), [H267N](Vodafone/Retail/ZTE/H267N/) | VDSL2 / VoIP |
 | **ZTE** | [ZXHN H267A](Vodafone/Retail/ZTE/H267A/) | VDSL2 17a / Dual-band AC / VoIP |
 | **ZTE** | [ZXHN H268Q](Vodafone/Retail/ZTE/H268Q/), [H268Q Wi-Fi 6](Vodafone/Retail/ZTE/H268Q_WiFi6/) | VDSL2 35b / Wi-Fi 5 & Wi-Fi 6 / VoIP |
 | **ZTE** | [ZXHN H367N](Vodafone/Retail/ZTE/H367N/) | VDSL2 / VoIP |
+| **ZTE** | [MC888 Ultra](Vodafone/Retail/ZTE/MC888_Ultra/) | 5G R16 / Wi-Fi 6 CPE |
 | **ZTE** | [MF289F](Vodafone/Retail/ZTE/MF289F/) | 4G+ / LTE Cat20 Gateway |
 
 #### OneNet Business Solutions (`Vodafone/OneNet/`)
 | Manufacturer | Models | Highlights |
 | :--- | :--- | :--- |
-| **Aethra** | BG8542(E)WAC, BG8544(E)WAC, SV6044EM, XV8800 series | Enterprise VoIP & Multi-WAN business routers |
-| **Oxygen** | EIA03002, HPV05200/05400/15400, IVL32100, IVV14200/34200, OIA45402, OJV35800/55800, OLA55204 | Carrier-grade IP PBX & ISDN/VoIP gateways |
+| **Aethra** | BG8542(E)WAC/HWAX, BG8544(E)WAC, SV6044EM, XV8800 series | Enterprise VoIP & Multi-WAN business routers |
+| **Nokia** | FastMile 5G Receiver HG-1 & HG-2 | Pro-grade 5G NR Outdoor Units |
+| **OneAccess** | One100 Series | Enterprise-oriented multi-service access routers and VoIP IADs |
+| **Oxygen** | EIA03002, HDV24201, HPV05200/05400/15400, IKA34200, IVL32100, IVV14200/34200, OIA35402/45402, OJA35800, OJV35800/55800, OLA42004/55204 | Carrier-grade IP PBX & ISDN/VoIP gateways |
 | **Sercomm** | H300s (OneNet variant) | Business-configured Sercomm router |
-| **ZTE** | H267A, H268Q (WiFi 5 & WiFi 6 OneNet editions) | OneNet SIP trunking / voice firmware |
+| **ZTE** | H267A, H268Q (WiFi 5 & WiFi 6), MC888 Ultra OneNet editions | OneNet SIP trunking / voice firmware |
 
 ---
 

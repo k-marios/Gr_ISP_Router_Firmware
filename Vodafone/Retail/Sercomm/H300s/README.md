@@ -1,63 +1,103 @@
-# Vodafone H300s (Sercomm) Firmware Decryptor & Mod Tools
+# Vodafone H300s (Sercomm) Firmware Toolkit
 
-Reverse engineering, decryption, extraction, and modification tools for the **Vodafone H300s** (Sercomm) router firmware (tested on `v1.2.01.06_debug` and `v1.2.02.08`).
-
----
-
-## 🛠️ Hardware & Architecture Overview
-* **Processor:** Realtek RTL8685SB (MIPS interAptiv, multi-core)
-* **Flash Type:** 16MB SPI-NAND Flash
-* **File Systems:** 
-  * Read-Only Rootfs: SquashFS over UBI (`mtd:ubi_vol_rootfs`)
-  * Writable Persistent Storage: YAFFS2 (`/config`, `/mnt/appdat`, `/mnt/appdeb`)
+Complete tooling to decrypt, unpack, modify, rebuild, and re-encrypt firmware images for the **Vodafone H300s** (Sercomm) router. Verified on firmware releases `v1.2.01.06_debug` and `v1.2.02.08`.
 
 ---
 
-## 🔐 Cryptography & Firmware Structure
+## 🛠️ Hardware & Architecture Specifications
 
-Sercomm firmware images for this model use a custom header structure combined with **AES-256-CBC** encryption.
-
-1. **Header Layout (First 160 Bytes / 0xA0 Offset):**
-   * `0x00 - 0x08`: Magic bytes (e.g., `CS9` header `0000000043533900`)
-   * `0x20 - 0x40`: Firmware version string (null-padded)
-   * `0x40 - 0x50`: AES-CBC Initialization Vector (IV)
-   * `0x60 - 0x80`: Seed bytes
-   * `0x80 - 0x90`: ASCII string representing the expected payload length
-
-2. **Key Derivation Pipeline:**
-   The decryption key is derived using a 3-stage parallel MD5 hashing pipeline combined with a custom 28-character permutation table (`PERM_TABLE = "26aejsw37bfktx48chmuy59dipvz"`), transforming the intermediate hashes into a final 32-byte AES-256 key.
+* **SoC:** Realtek RTL8685SB (MIPS interAptiv, multi-threading / 4 VPEs)
+* **Flash:** 16MB SPI-NAND
+* **Partitions:**
+  * Rootfs: Read-only SquashFS 4.0 over UBI (`mtd:ubi_vol_rootfs`)
+  * Persistent Storage: YAFFS2 (`/config` on `mtd9`, `/mnt/appdat` on `mtd10`, `/mnt/appdeb` on `mtd12`)
 
 ---
 
-## 📜 Scripts Included
+## 🔐 Firmware Encryption & Header Structure
 
-* **`decrypt_h300s.py`**: Automatically parses the Sercomm header, derives the AES-256 key using the version string and seed, decrypts the payload, and verifies the inner `UBI#` container.
-* **`encrypt_h300s.py`**: Takes a modified UBI/SquashFS image, pads it via PKCS#7, encrypts it back with AES-256-CBC, and constructs a valid Sercomm `.img` container ready for flashing.
-* **`test_h300s.py`**: Validates end-to-end encryption/decryption integrity by comparing SHA-256 hashes of the original and reconstructed images.
+Firmware images are encapsulated within a custom Sercomm container and encrypted using **AES-256-CBC**.
 
----
+### 1. Outer Header Layout (First 160 Bytes / 0xA0)
+* `0x00 - 0x08`: Magic signature (`\x00\x00\x00\x00CS9\x00` or zero-padded)
+* `0x20 - 0x40`: Firmware version string (ASCII, null-padded)
+* `0x40 - 0x50`: Initialization Vector (IV, 16 bytes)
+* `0x60 - 0x80`: Seed bytes (32 bytes)
+* `0x80 - 0x90`: Payload byte length (ASCII string, null-terminated)
 
-## 🚀 Usage
-
-### 1. Decrypting Firmware
-```bash
-python decrypt_h300s.py Vodafone_H_300s_v1.2.02.08.img
+### 2. Key Derivation Pipeline
+The encryption key is generated via three parallel MD5 digests coupled with a 28-character permutation lookup table:
 
 ```
 
-### 2. Extracting UBI & SquashFS Rootfs
+m1 = MD5(seed_60 + version)
+m2 = MD5(STR_A + version)
+m3 = MD5(STR_B + version)
+d_final = MD5(m1 + m2 + m3)
+key = [ TABLE[byte % 28] for byte in hex_format(d_final) ][:32]
 
-After obtaining the decrypted `.ubi` container (stripping the initial 288-byte Sercomm inner header):
+```
+
+### 3. Inner Container
+Decrypting the payload yields an inner Sercomm container where the actual `UBI#` stream starts at offset **288** (`0x120`), organized in 128KB physical eraseblocks.
+
+---
+
+## 📦 Prerequisites & Dependencies
+
+### System Packages
+```bash
+# Arch Linux
+sudo pacman -S squashfs-tools mtd-utils python python-pip
+
+# Debian / Ubuntu
+sudo apt update && sudo apt install -y squashfs-tools mtd-utils python3 python3-pip
+
+```
+
+### Python Dependencies
 
 ```bash
-# Strip the 288-byte inner header
+pip install -r requirements.txt
+
+```
+
+---
+
+## 🔧 Manual Workflow
+
+### Step 1: Decrypt Firmware
+
+```bash
+python3 decrypt_h300s.py Vodafone_H_300s_v1.2.02.08.img
+
+```
+
+### Step 2: Strip Inner Header
+
+```bash
 dd if=Vodafone_H_300s_v1.2.02.08_decrypted.ubi of=pure.ubi bs=288 skip=1
 
-# Extract UBI images using ubi_reader
-ubireader_extract_images pure.ubi -o extracted
+```
 
-# Unpack SquashFS rootfs
-unsquashfs -d rootfs_extracted extracted/*vol-ubi_vol_rootfs.ubifs
+### Step 3: Extract UBI Volumes
+
+```bash
+ubireader_extract_images pure.ubi -o extracted_ubi
+
+```
+
+### Step 4: Unpack Rootfs
+
+```bash
+unsquashfs -d rootfs_v1.2.02.08 extracted_ubi/*/*vol-ubi_vol_rootfs.ubifs
+
+```
+
+### Step 5: Re-encrypt Modified Image
+
+```bash
+python3 encrypt_h300s.py new_firmware.ubi Vodafone_H300s_custom.img
 
 ```
 
@@ -65,4 +105,4 @@ unsquashfs -d rootfs_extracted extracted/*vol-ubi_vol_rootfs.ubifs
 
 ## ⚠️ Disclaimer
 
-This repository is for educational, research, and self-hosted device auditing purposes only. Use these scripts at your own risk. Modifying router firmware incorrectly may result in a bricked device.
+This toolkit is providedThis request was blocked by Gemini's filters. They can occasionally trigger by mistake on safe coding, security, or biology-related queries. Please try rephrasing your prompt.

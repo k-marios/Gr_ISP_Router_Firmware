@@ -6,15 +6,16 @@
 
 <br/>
 
-[![OTE](https://img.shields.io/badge/OTE-00458C?style=flat&logoColor=white)](Cosmote/)
 [![Cosmote](https://img.shields.io/badge/Cosmote-008A00?style=flat&logoColor=white)](Cosmote/)
-[![Telekom](https://img.shields.io/badge/Telekom-E20074?style=flat&logo=deutschetelekom&logoColor=white)](Cosmote/)
-[![Vodafone](https://img.shields.io/badge/Vodafone-E60000?style=flat&logo=vodafone&logoColor=white)](Vodafone/)
-[![Nova](https://img.shields.io/badge/Nova-000000?style=flat&logoColor=white)](Nova/)
-[![Wind](https://img.shields.io/badge/Wind-009FE3?style=flat&logoColor=white)](Wind/)
+[![Cyta](https://img.shields.io/badge/Cyta-792482?style=flat&logoColor=white)](Cyta/)
 [![Forthnet](https://img.shields.io/badge/Forthnet-F58220?style=flat&logoColor=white)](Forthnet/)
 [![HOL](https://img.shields.io/badge/HOL-E30613?style=flat&logoColor=white)](HOL/)
-[![Cyta](https://img.shields.io/badge/Cyta-792482?style=flat&logoColor=white)](Cyta/)
+[![Nova](https://img.shields.io/badge/Nova-000000?style=flat&logoColor=white)](Nova/)
+[![OTE](https://img.shields.io/badge/OTE-00458C?style=flat&logoColor=white)](OTE/)
+[![PPC](https://img.shields.io/badge/PPC-white?style=flat&logoColor=white)](PPC/)
+[![Vodafone](https://img.shields.io/badge/Vodafone-E60000?style=flat&logo=vodafone&logoColor=white)](Vodafone/)
+[![Wind](https://img.shields.io/badge/Wind-009FE3?style=flat&logoColor=white)](Wind/)
+
 
 >A centralized, community-driven preservation repository archiving ISP-customized firmware binaries, recovery images, and documentation for CPE routers, VoIP gateways, and modems distributed by Greek Internet Service Providers (both active and legacy).
 
@@ -25,13 +26,15 @@
 - [Why This Repository Exists](#why-this-repository-exists)
 - [Root Passwords & Superuser Guide](#root-passwords--superuser-guide)
 - [Provider & Hardware Catalog](#provider--hardware-catalog)
-  - [1. Cosmote (OTE)](#1-cosmote-ote)
-  - [2. Vodafone Greece](#2-vodafone-greece)
-  - [3. Nova](#3-nova)
-  - [4. Wind Hellas (Legacy)](#4-wind-hellas-legacy)
-  - [5. Forthnet (Legacy)](#5-forthnet-legacy)
-  - [6. HOL - Hellas On-Line (Legacy)](#6-hol---hellas-on-line-legacy)
-  - [7. Cyta Hellas (Legacy)](#7-cyta-hellas-legacy)
+  - [1. Cosmote](#1-cosmote)
+  - [2. Cyta Hellas (Legacy)](#2-cyta-hellas-legacy)
+  - [3. Forthnet (Legacy)](#3-forthnet-legacy)
+  - [4. HOL - Hellas On-Line (Legacy)](#4-hol---hellas-on-line-legacy)
+  - [5. Nova](#5-nova)
+  - [6. OTE (Legacy)](#6-ote-legacy)
+  - [7. PPC - Public Power Corporation](#7-ppc---public-power-corporation)
+  - [8. Vodafone Greece](#8-vodafone-greece)
+  - [9. Wind Hellas (Legacy)](#9-wind-hellas-legacy)
 - [Critical Flashing & Operation Tips](#critical-flashing--operation-tips)
 - [Repository Directory Structure](#repository-directory-structure)
 - [Contributing](#contributing)
@@ -65,32 +68,117 @@ Looking for root credentials, superuser logins, or hidden maintenance accounts f
 
 The archive is organized hierarchically by `Provider / Manufacturer / Model`.
 
-### 1. Cosmote (OTE)
-[![Cosmote](https://img.shields.io/badge/Cosmote-008A00?style=flat&logoColor=white)](Cosmote/)
-[![OTE](https://img.shields.io/badge/OTE-00458C?style=flat&logoColor=white)](Cosmote/)
-[![Telekom](https://img.shields.io/badge/Telekom-E20074?style=flat&logo=deutschetelekom&logoColor=white)](Cosmote/)  
+### 1. Cosmote
+[![Cosmote](https://img.shields.io/badge/Cosmote-008A00?style=flat&logoColor=white)](Cosmote/)  
 *Folder: [`Cosmote/`](Cosmote/)*
 
 | Manufacturer | Model / Device Name | Technology / Type | Notes |
 | :--- | :--- | :--- | :--- |
 | **Arcadyan** | [Speedport Plus 2](Cosmote/Arcadyan/Speedport_Plus_2/) | VDSL2 / Vectoring / VoIP | ⚠️ *Do not cross-flash with Sercomm Plus 2* |
 | **Huawei** | [HA35-10](Cosmote/Huawei/HA35-10/) | VDSL2 + 4G Hybrid Access | Cosmote Home SpeedBooster (Bonded DSL + LTE) |
-| **Intracom** | [JetSpeed 520](Cosmote/Intracom/Jetspeed_520/) | ADSL / ADSL2+ | Annex A & Annex B images |
 | **Oxygen** | [HDI24201](Cosmote/Oxygen/HDI24201/), [HDI34201](Cosmote/Oxygen/HDI34201/) | VDSL2 / Multi-line VoIP / ISDN | Business PBX / Enterprise Gateways |
 | **Sercomm** | [Speedport Plus 1](Cosmote/Sercomm/Speedport_Plus_1/) | VDSL2 35b / Vectoring / VoIP | - |
 | **Sercomm** | [Speedport Plus 2](Cosmote/Sercomm/Speedport_Plus_2/) | VDSL2 / Vectoring / VoIP | ⚠️ *Do not cross-flash with Arcadyan Plus 2* |
 | **Sercomm** | [Speedport W 724V (Type Ci)](Cosmote/Sercomm/Speedport_W_724V_Type_Ci/) | VDSL2 / VoIP | Legacy Gigabit dual-band CPE |
 | **ZTE** | [Speedport Entry 2i](Cosmote/ZTE/Speedport_Entry_2i/) | VDSL2 17a / VoIP | Popular workhorse VDSL router |
-| **ZTE** | [ZXHN H108NS](Cosmote/ZTE/H108NS/) | ADSL2+ | Annex A & Annex B variants |
 | **ZTE** | [ZXHN H1600](Cosmote/ZTE/H1600/) | VDSL2 35b / Wi-Fi 6 / VoIP | Includes [Firmware Changelog](Cosmote/ZTE/H1600/README.md) |
 
 ---
 
-### 2. Vodafone Greece
+### 2. Cyta Hellas (Legacy)
+[![Cyta](https://img.shields.io/badge/Cyta-792482?style=flat&logoColor=white)](Cyta/) *(Acquired by Vodafone)*  
+*Folder: [`Cyta/`](Cyta/)*
+
+| Manufacturer | Model | Description |
+| :--- | :--- | :--- |
+| **ZTE** | [ZXHN H208N](Cyta/ZTE/H208N/) | Cyta VDSL2 / VoIP Gateway |
+| **ZTE** | [ZXHN H267N](Cyta/ZTE/H267N/) | Cyta VDSL2 / VoIP Gateway |
+
+---
+
+### 3. Forthnet (Legacy)
+[![Forthnet](https://img.shields.io/badge/Forthnet-F58220?style=flat&logoColor=white)](Forthnet/) *(Rebranded to Nova)*  
+*Folder: [`Forthnet/`](Forthnet/)*
+
+| Manufacturer | Model | Description |
+| :--- | :--- | :--- |
+| **AirTies** | [RT-111](Forthnet/Airties/RT-111/) | ADSL2+ / Fast Ethernet Router |
+| **D-Link** | [DSL-2640B](Forthnet/D-Link/DSL-2640B/) | ADSL2+ / 802.11g Wireless Router |
+| **Huawei** | [DG8245V-10](Forthnet/Huawei/DG8245V-10/) | VDSL2 / 802.11ac VoIP Gateway |
+| **Huawei** | [HG521](Forthnet/Huawei/HG521/) | ADSL2+ / 802.11n Wireless Router |
+| **Linksys** | [WAG200G](Forthnet/Linksys/WAG200G/), [WAG354G](Forthnet/Linksys/WAG354G/) | ADSL2+ / 802.11g Wireless Routers |
+| **Siemens** | [CL110](Forthnet/Siemens/CL110/), [CL110i](Forthnet/Siemens/CL110i/) | ADSL2+ Modems / PSTN, ISDN respectively |
+| **Technicolor** | [TD5130](Forthnet/Technicolor/TD5130/) | ADSL2+ / 802.11n Wireless Router |
+| **Technicolor** | [TG788vn](Forthnet/Technicolor/TG788vn/), [TG788v v3](Forthnet/Technicolor/TG788v_v3/) | Classic Forthnet VDSL modems |
+| **Thomson** | [TG585 v7](Forthnet/Thomson/TG585_v7/), [TG585 v8](Forthnet/Thomson/TG585_v8/) | ADSL2+ / 802.11g Wireless Routers |
+| **US Robotics** | [USR9108](Forthnet/US_Robotics/USR9108/) | ADSL2+ / 802.11g Wireless Router |
+| **US Robotics** | [USR9112](Forthnet/US_Robotics/USR9112/) | ADSL2+ Modem |
+| **ZTE** | [ZXHN H108L](Forthnet/ZTE/H108L/) | ADSL2+ / 802.11n Router |
+| **ZTE** | [ZXHN H108N v2.5](Forthnet/ZTE/H108N_v2.5/) | ADSL2+ router |
+| **ZTE** | [ZXHN H288A](Forthnet/ZTE/H288A/) | VDSL2 35b / VoIP |
+
+---
+
+### 4. HOL - Hellas On-Line (Legacy)
+[![HOL](https://img.shields.io/badge/HOL-E30613?style=flat&logoColor=white)](HOL/) *(Acquired by Vodafone)*  
+*Folder: [`HOL/`](HOL/)*
+
+| Manufacturer | Model | Description |
+| :--- | :--- | :--- |
+| **Alcatel-Lucent** | [CellPipe 7130](HOL/Alcatel/CellPipe_7130/) | Early VDSL2 / ADSL2+ gateway |
+| **AVM (Fritz!)** | [Fritz!Box Fon WLAN 7140](HOL/Fritz/Box_7140/) | Annex A & Annex B German PBX router (HOL edition) |
+| **Intracom** | [NetFasteR IAD](HOL/Intracom/Netfaster_IAD/) | Annex A & B VoIP gateway |
+| **Intracom** | [NetFasteR IAD 2](HOL/Intracom/Netfaster_IAD2/), [IAD 3](HOL/Intracom/Netfaster_IAD3/) | Legendary Greek VoIP CPEs |
+| **Intracom** | [NetFasteR IAD 3](HOL/Intracom/Netfaster_IAD3) | ADSL2+ VoIP gateway |
+| **Technicolor** | [TD5136v2](HOL/Technicolor/TD5136v2/) | ADSL2+ router |
+| **ZTE** | [ZXHN H108N v2.3](HOL/ZTE/H108N_v2.3/) | ADSL2+ gateway |
+| **ZTE** | [ZXHN H168N](HOL/ZTE/H168N/) | VDSL2 gateway |
+
+---
+
+### 5. Nova
+[![Nova](https://img.shields.io/badge/Nova-000000?style=flat&logoColor=white)](Nova/)  
+*Folder: [`Nova/`](Nova/)*
+
+| Manufacturer | Model | Description |
+| :--- | :--- | :--- |
+| **Huawei** | [DN8245V-70](Nova/Huawei/DN8245V-70/) | SuperVectoring 35b / Dual-Band Wi-Fi / VoIP Gateway |
+| **ZTE** | [ZXHN H288A](Nova/ZTE/H288A/) | Gigabit VDSL2 35b / AC1600 / VoIP |
+| **Zyxel** | [VMG1312-T20B](Nova/Zyxel/VMG1312-T20B/) | VDSL2 / Multi-WAN Router |
+| **Zyxel** | [VMG8623-T50B](Nova/Zyxel/VMG8623-T50B/) | AC2400 Dual-Band VDSL2 / VoIP Gateway |
+
+---
+
+### 6. OTE (Legacy)
+[![OTE](https://img.shields.io/badge/OTE-00458C?style=flat&logoColor=white)](OTE/)  
+*Folder: [`OTE/`](OTE/)*
+
+| Manufacturer | Model / Device Name | Technology / Type | Notes |
+| :--- | :--- | :--- | :--- |
+| **Intracom** | [JetSpeed 520](OTE/Intracom/Jetspeed_520/) | ADSL / ADSL2+ | Annex A & Annex B images |
+| **ZTE** | [ZXDSL 931VII](OTE/ZTE/931VII/) | VDSL2 17a | One of the first VDSL CPEs to be given out by OTE |
+| **ZTE** | [ZXHN H108NS](OTE/ZTE/H108NS/) | ADSL2+ | Annex A & Annex B variants |
+| **ZTE** | [ZXV10 W300](OTE/ZTE/W300/) | ADSL2+ | Annex A & Annex B variants |
+
+---
+
+### 7. PPC - Public Power Corporation
+[![PPC](https://img.shields.io/badge/PPC-white?style=flat&logoColor=white)](PPC/)  
+*Folder: [`PPC/`](PPC/)*
+
+| Manufacturer | Model / Device Name | Technology / Highlights |
+| :--- | :--- | :--- |
+| **ZTE** | [ZXHN F6625P](PPC/ZTE/F6625P/) | GPON / Wi-Fi 6 FTTH Gateway |
+| **ZTE** | [ZXHN F8648P](PPC/ZTE/F8648P/) | XGS-PON / Wi-Fi 6 FTTH Gateway |
+| **ZTE** | [ZXHN F8748](PPC/ZTE/F8748/) | XGS-PON / Wi-Fi 7 FTTH Gateway |
+
+---
+
+### 8. Vodafone Greece
 [![Vodafone](https://img.shields.io/badge/Vodafone-E60000?style=flat&logo=vodafone&logoColor=white)](Vodafone/)  
 *Folder: [`Vodafone/`](Vodafone/)*
 
-Split into **Retail** (residential) and **OneNet** (business/enterprise) solutions:
+Split into **Retail** (residential, often referred to as ODP) and **OneNet** (business/enterprise) solutions:
 
 #### Retail Solutions (`Vodafone/Retail/`)
 | Manufacturer | Model / Device Name | Technology / Highlights |
@@ -121,20 +209,7 @@ Split into **Retail** (residential) and **OneNet** (business/enterprise) solutio
 
 ---
 
-### 3. Nova
-[![Nova](https://img.shields.io/badge/Nova-000000?style=flat&logoColor=white)](Nova/)  
-*Folder: [`Nova/`](Nova/)*
-
-| Manufacturer | Model | Description |
-| :--- | :--- | :--- |
-| **Huawei** | [DN8245V-70](Nova/Huawei/DN8245V-70/) | SuperVectoring 35b / Dual-Band Wi-Fi / VoIP Gateway |
-| **ZTE** | [ZXHN H288A](Nova/ZTE/H288A/) | Gigabit VDSL2 35b / AC1600 / VoIP |
-| **Zyxel** | [VMG1312-T20B](Nova/Zyxel/VMG1312-T20B/) | VDSL2 / Multi-WAN Router |
-| **Zyxel** | [VMG8623-T50B](Nova/Zyxel/VMG8623-T50B/) | AC2400 Dual-Band VDSL2 / VoIP Gateway |
-
----
-
-### 4. Wind Hellas (Legacy)
+### 9. Wind Hellas (Legacy)
 [![Wind](https://img.shields.io/badge/Wind-009FE3?style=flat&logoColor=white)](Wind/) *(Merged into Nova)*  
 *Folder: [`Wind/`](Wind/)*
 
@@ -143,48 +218,13 @@ Split into **Retail** (residential) and **OneNet** (business/enterprise) solutio
 | **Technicolor** | [DGA 4130](Wind/Technicolor/DGA4130/) | Broadcom-based VDSL2 35b gateway (Homeware / OpenWrt moddable) |
 | **Technicolor** | [TG788v v3](Wind/Technicolor/TG788v_v3/) | VDSL2 Gateway |
 | **Technicolor** | [TG789vac v2](Wind/Technicolor/TG789vac/) | Dual-band AC VDSL2 Gateway |
-| **ZTE** | [ZXHN H108L](Wind/ZTE/H108L/) | ADSL2+ |
-| **ZTE** | [ZXHN H288A](Wind/ZTE/H288A/) | VDSL2 35b / AC VoIP Gateway |
+| **ZTE** | [ZXHN H108L](Wind/ZTE/ZXHN_H108L/), [ZXV10 H108L](Wind/ZTE/ZXV10_H108L/) | ADSL2+, 2 different variants |
+| **ZTE** | [ZXHN H108N v2.5](Wind/ZTE/H108N_v2.5/) | ADSL2+ / 802.11n Gateway |
+| **ZTE** | [ZXHN H168N](Wind/ZTE/H168N/) | VDSL2 17a / 802.11n Gateway |
+| **ZTE** | [ZXHN H268N](Wind/ZTE/H268N/) | VDSL2 17a / 802.11n VoIP Gateway |
+| **ZTE** | [ZXHN H288A](Wind/ZTE/H288A/) | VDSL2 35b / 802.11ac VoIP Gateway |
+| **Zyxel** | [VMG1312-B10A](Wind/Zyxel/VMG1312-B10A/), [VMG1312-B10D](Wind/Zyxel/VMG1312-B10D/) | Legacy VDSL2 802.11n Gateways |
 | **Zyxel** | [VMG8623-T50B](Wind/Zyxel/VMG8623-T50B/) | Dual-Band VDSL2 Gateway |
-
----
-
-### 5. Forthnet (Legacy)
-[![Forthnet](https://img.shields.io/badge/Forthnet-F58220?style=flat&logoColor=white)](Forthnet/) *(Rebranded to Nova)*  
-*Folder: [`Forthnet/`](Forthnet/)*
-
-| Manufacturer | Model | Description |
-| :--- | :--- | :--- |
-| **Huawei** | [DG8245V-10](Forthnet/Huawei/DG8245V-10/) | VDSL2 / AC VoIP Gateway |
-| **Technicolor** | [TG788vn](Forthnet/Technicolor/TG788vn/), [TG788v v3](Forthnet/Technicolor/TG788v_V3/) | Classic Forthnet VDSL modems |
-| **ZTE** | [ZXHN H108N v2.5](Forthnet/ZTE/H108N_v2.5/) | ADSL2+ router |
-| **ZTE** | [ZXHN H288A](Forthnet/ZTE/H288A/) | VDSL2 35b / VoIP |
-
----
-
-### 6. HOL - Hellas On-Line (Legacy)
-[![HOL](https://img.shields.io/badge/HOL-E30613?style=flat&logoColor=white)](HOL/) *(Acquired by Vodafone)*  
-*Folder: [`HOL/`](HOL/)*
-
-| Manufacturer | Model | Description |
-| :--- | :--- | :--- |
-| **Alcatel-Lucent** | [CellPipe 7130](HOL/Alcatel/CellPipe_7130/) | Early VDSL2 / ADSL2+ gateway |
-| **AVM (Fritz!)** | [Fritz!Box Fon WLAN 7140](HOL/Fritz/Box_7140/) | Annex A & Annex B German PBX router (HOL edition) |
-| **Intracom** | [NetFasteR IAD](HOL/Intracom/Netfaster_IAD/) | Annex A & B VoIP gateway |
-| **Intracom** | [NetFasteR IAD 2](HOL/Intracom/Netfaster_IAD2/), [IAD 3](HOL/Intracom/Netfaster_IAD3/) | Legendary Greek VoIP CPEs |
-| **Technicolor** | [TD5136v2](HOL/Technicolor/TD5136v2/) | ADSL2+ router |
-| **ZTE** | [ZXHN H108N v2.3](HOL/ZTE/H108N_v2.3/), [H168N](HOL/ZTE/H168N/) | ADSL2+ and VDSL2 gateways |
-
----
-
-### 7. Cyta Hellas (Legacy)
-[![Cyta](https://img.shields.io/badge/Cyta-792482?style=flat&logoColor=white)](Cyta/) *(Acquired by Vodafone)*  
-*Folder: [`Cyta/`](Cyta/)*
-
-| Manufacturer | Model | Description |
-| :--- | :--- | :--- |
-| **ZTE** | [ZXHN H208N](Cyta/ZTE/H208N/) | Cyta VDSL2 / VoIP Gateway |
-| **ZTE** | [ZXHN H267N](Cyta/ZTE/H267N/) | Cyta VDSL2 / VoIP Gateway |
 
 ---
 
@@ -217,32 +257,20 @@ Gr_ISP_Router_Firmware/
 ├── Cosmote/
 │   ├── Arcadyan/
 │   ├── Huawei/
-│   ├── Intracom/
 │   ├── Oxygen/
 │   ├── Sercomm/
 │   └── ZTE/
-├── Vodafone/
-│   ├── Retail/
-│   │   ├── Sercomm/
-│   │   ├── TP-LINK/
-│   │   ├── Vantiva/
-│   │   └── ZTE/
-│   └── OneNet/
-│       ├── Aethra/
-│       ├── Oxygen/
-│       ├── Sercomm/
-│       └── ZTE/
-├── Nova/
-│   ├── Huawei/
-│   ├── ZTE/
-│   └── Zyxel/
-├── Wind/
-│   ├── Technicolor/
-│   ├── ZTE/
-│   └── Zyxel/
+├── Cyta/
+│   └── ZTE/
 ├── Forthnet/
+│   ├── Airties/
+│   ├── D-Link/
 │   ├── Huawei/
+│   ├── Linksys/
+│   ├── Siemens/
 │   ├── Technicolor/
+│   ├── Thomson
+│   ├── US_Robotics/
 │   └── ZTE/
 ├── HOL/
 │   ├── Alcatel/
@@ -250,8 +278,34 @@ Gr_ISP_Router_Firmware/
 │   ├── Intracom/
 │   ├── Technicolor/
 │   └── ZTE/
-├── Cyta/
+├── Nova/
+│   ├── Huawei/
+│   ├── ZTE/
+│   └── Zyxel/
+├── OTE/
+│   ├── Intracom/
 │   └── ZTE/
+├── PPC/
+│   └── ZTE/
+├── Vodafone/
+│   ├── Retail/
+│   │   ├── Airties/
+│   │   ├── Huawei/
+│   │   ├── Sercomm/
+│   │   ├── TP-LINK/
+│   │   ├── Vantiva/
+│   │   └── ZTE/
+│   └── OneNet/
+│       ├── Aethra/
+│       ├── Nokia/
+│       ├── OneAccess/
+│       ├── Oxygen/
+│       ├── Sercomm/
+│       └── ZTE/
+├── Wind/
+│   ├── Technicolor/
+│   ├── ZTE/
+│   └── Zyxel/
 ├── DISCLAIMER.md
 ├── DISCLAIMER_GR.md
 ├── ROOT_PASSWORDS.md

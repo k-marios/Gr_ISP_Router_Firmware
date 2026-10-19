@@ -13,7 +13,6 @@
 [![Nova](https://img.shields.io/badge/Nova-000000?style=flat&logoColor=white)](Nova/)
 [![OTE](https://img.shields.io/badge/OTE-00458C?style=flat&logoColor=white)](OTE/)
 [![PPC](https://img.shields.io/badge/PPC-white?style=flat&logoColor=white)](PPC/)
-<!--[![Telekom](https://img.shields.io/badge/Telekom-E20074?style=flat&logo=deutschetelekom&logoColor=white)](Cosmote/)-->
 [![Vodafone](https://img.shields.io/badge/Vodafone-E60000?style=flat&logo=vodafone&logoColor=white)](Vodafone/)
 [![Wind](https://img.shields.io/badge/Wind-009FE3?style=flat&logoColor=white)](Wind/)
 

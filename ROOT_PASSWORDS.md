@@ -5,6 +5,7 @@
    * [Sercomm H300s](#sercomm-h300s)
    * [ZTE](#zte)
      * [H267A](#h267a)
+     * [H267N](#h267n)
      * [H268Q](#h268q)
    * [TP-Link 100v](#tp-link-100v)
    * [Cyta](#cyta)
@@ -84,6 +85,22 @@ Password:
 
  (same as previous one, except for removing the `M`)
 
+#### H267N
+
+Same as H267A except remove ! from Password on firmware 1T7
+
+User:
+
+```
+root
+```
+
+Pass:
+
+```
+$Extra,ODP0ptiOns$987%
+```
+
 #### H268Q
 
 For ONLY the first ever released firmware, you may use the H267A's credentials. For all firmware versions after that, use the following:
@@ -127,6 +144,21 @@ Password:
 ```
 Cyt@_Adm1n_R3$
 ```
+
+For the ZTE ZXHN H267N with Cyta firmware T12:
+
+Username:
+```
+CytaAdmRes
+```
+
+Password:
+
+```
+cyt@_T3ch_$upp0rt
+```
+
+(If it doesnt work, do RTFD (Reset To Factory Defaults) from pinhole on the back)
 
 ### TP-Link 100v
 
